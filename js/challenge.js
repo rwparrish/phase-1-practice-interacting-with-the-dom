@@ -4,16 +4,19 @@ const plusButton = document.getElementById('plus')
 const minusButton = document.getElementById('minus')
 const pauseButton = document.getElementById('pause')
 const counter = document.getElementById('counter')
-
-
-let intervalID = setInterval(incrimentCounter, 1000)
+let paused = false
+let intervalID
 
 plusButton.addEventListener('click', increaseCounter)
 minusButton.addEventListener('click', decreaseCounter)
+pauseButton.addEventListener('click', pauseTimer)
+
+// not sure how to approach this one 
 likeButton.addEventListener('click', likeNumber)
 
-function incrimentCounter() {
-  counter.innerText++;
+
+function runCounter() {
+  intervalID = setInterval(() => counter.innerText++, 1000);
 }
 
 function increaseCounter() {
@@ -25,7 +28,16 @@ function decreaseCounter() {
 }
 
 function likeNumber() {
-  let numberOfLikes = 0;
-  numberOfLikes += 1;
-  console.log(numberOfLikes)
+  const numberOfLikes = 0;
+  
 }
+
+function pauseTimer() {
+  clearInterval(intervalID)
+  paused = !paused
+  if (!paused) {
+    runCounter()
+  }
+}
+
+runCounter()
