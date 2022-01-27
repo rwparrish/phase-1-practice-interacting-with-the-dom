@@ -8,15 +8,14 @@ const counter = document.getElementById('counter')
 const commentsContainer = document.getElementById('list')
 let paused = false
 let intervalID
+let numbersArray = []
+let numberOfLikes
 
 plusButton.addEventListener('click', increaseCounter)
 minusButton.addEventListener('click', decreaseCounter)
 pauseButton.addEventListener('click', pauseTimer)
-submitButton.addEventListener('submit', addComments)
-
-// not sure how to approach this one 
 likeButton.addEventListener('click', likeNumber)
-
+submitButton.addEventListener('submit', addComments)
 
 function runCounter() {
   intervalID = setInterval(() => counter.innerText++, 1000);
@@ -29,16 +28,20 @@ function increaseCounter() {
 function decreaseCounter() {
   counter.innerText--;
 }
-// append li
-// if num hasn't changed, then incriment numberOfLiks
-// if num has changed, then append new li and repeat 
+
 function likeNumber() {
-  num = counter.innerText
   let showLikesUl = document.querySelector('.likes')
   let likesLi = document.createElement('li')
-  let numberOfLikes = 0;
-  likesLi.innerText = `${num} was liked ${numberOfLikes += 1} times!`
-  showLikesUl.append(likesLi)
+  num = counter.innerText
+  likesLi.id = num
+  if (numbersArray.includes(num)) {
+    let matchingLi = document.getElementById(num)
+    matchingLi.innerText = `${num} was liked ${numberOfLikes += 1} times!`
+  } else {
+    likesLi.innerText = `${num} was liked ${numberOfLikes = 1} times!`
+    showLikesUl.append(likesLi)
+    numbersArray.push(num)
+  }
 }
 
 function pauseTimer() {
@@ -59,12 +62,13 @@ function pauseTimer() {
   }
 }
 // why isn't preventDefault() working here?
+
+let commentLi = document.createElement('li')
 function addComments(e) {
   e.preventDefault()
-  let commentLi = document.createElement('li')
+  
   commentLi.innerText = e.target.value
   commentsContainer.append(commentLi)
-  console.log(e.target.value)
 }
 
 runCounter()
