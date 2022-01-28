@@ -15,7 +15,7 @@ plusButton.addEventListener('click', increaseCounter)
 minusButton.addEventListener('click', decreaseCounter)
 pauseButton.addEventListener('click', pauseTimer)
 likeButton.addEventListener('click', likeNumber)
-submitButton.addEventListener('submit', addComments)
+submitButton.addEventListener('click', addComments)
 
 function runCounter() {
   intervalID = setInterval(() => counter.innerText++, 1000);
@@ -61,13 +61,12 @@ function pauseTimer() {
     runCounter()
   }
 }
-// why isn't preventDefault() working here?
 
-let commentLi = document.createElement('li')
 function addComments(e) {
-  e.preventDefault()
-  
-  commentLi.innerText = e.target.value
+  e.preventDefault(e);
+  let commentLi = document.createElement('li')
+  let inputVal = document.getElementById("comment-input").value
+  commentLi.innerText = inputVal
   commentsContainer.append(commentLi)
 }
 
