@@ -65,7 +65,7 @@ function pauseTimer() {
 function addComments(e) {
   e.preventDefault(e);
   let commentLi = document.createElement('li')
-  let inputVal = document.getElementById("comment-input").value
+  let inputVal = document.getElementById('comment-input').value
   commentLi.innerText = inputVal
   commentsContainer.append(commentLi)
 }
